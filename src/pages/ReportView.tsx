@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { jsPDF } from 'jspdf';
 import { 
   FileText, 
   Calendar, 
@@ -23,7 +24,6 @@ const ReportView: React.FC = () => {
     const fetchReport = () => {
       setLoading(true);
 
-      // Simulate API fetch by retrieving data from localStorage
       setTimeout(() => {
         const sessions = JSON.parse(localStorage.getItem('sessions') || '[]');
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,11 +36,48 @@ const ReportView: React.FC = () => {
         }
 
         setLoading(false);
-      }, 1000); // Simulate network delay
+      }, 1000); 
     };
 
     fetchReport();
   }, [id]);
+
+  const handleExportPDF = () => {
+    if (!report) return;
+
+    const doc = new jsPDF();
+
+    // Add title
+    doc.setFontSize(18);
+    doc.text('Medical Report', 10, 10);
+
+    // Add patient information
+    doc.setFontSize(14);
+    doc.text('Patient Information:', 10, 20);
+    doc.setFontSize(12);
+    doc.text(`Name: ${report.patientInfo.name}`, 10, 30);
+    doc.text(`Patient ID: ${report.patientInfo.id}`, 10, 40);
+    doc.text(`Date of Birth: ${new Date(report.patientInfo.dob).toLocaleDateString()}`, 10, 50);
+    doc.text(`Reason for Visit: ${report.patientInfo.reason}`, 10, 60);
+
+    // Add transcription
+    doc.setFontSize(14);
+    doc.text('Transcription:', 10, 80);
+    doc.setFontSize(12);
+    doc.text(report.transcript, 10, 90, { maxWidth: 190 });
+
+    // Add medical terms
+    doc.setFontSize(14);
+    doc.text('Medical Summary:', 10, 120);
+    doc.setFontSize(12);
+    doc.text(`PHI: ${report.medicalSummary.phi.join(', ')}`, 10, 130);
+    doc.text(`Symptoms: ${report.medicalSummary.symptoms.join(', ')}`, 10, 140);
+    doc.text(`Diagnosis: ${report.medicalSummary.diagnosis.join(', ')}`, 10, 150);
+    doc.text(`Follow-Up: ${report.medicalSummary.followUp.join(', ')}`, 10, 160);
+
+    // Save the PDF
+    doc.save(`Medical_Report_${report.patientInfo.name}.pdf`);
+  };
 
   if (loading) {
     return (
@@ -92,7 +129,10 @@ const ReportView: React.FC = () => {
                   <Printer className="h-4 w-4" />
                   <span>Print</span>
                 </button>
-                <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                <button
+                  onClick={handleExportPDF}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                >
                   <Download className="h-4 w-4" />
                   <span>Export</span>
                 </button>

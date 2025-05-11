@@ -1,3 +1,4 @@
+// It includes a navigation bar, hero section, features section, how it works section, social proof section, and a footer.
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mic, Clock, Brain, Shield, ChevronRight, Play } from 'lucide-react';
@@ -72,7 +73,7 @@ const LandingPage: React.FC = () => {
             </div>
             <div className="relative">
               <img 
-                src="https://images.pexels.com/photos/7089629/pexels-photo-7089629.jpeg"
+                src="./assets/MedScribeImage.jpg"
                 alt="Doctor using MedScribe"
                 className="rounded-lg shadow-xl"
               />
