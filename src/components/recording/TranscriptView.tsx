@@ -34,7 +34,7 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({
           accessKeyId: 'AKIA5FTY675QX7Q3N2KO',
           secretAccessKey: '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',
         },
-      }); 
+      });
       const command = new DetectEntitiesV2Command({ Text: text });
 
       try {
@@ -48,6 +48,27 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({
           followUp: [] as string[],
           medication: [] as string[],
         };
+
+        // Check for specific phrases manually
+        const followUpPhrases = [
+          'follow up in 2 weeks',
+          'schedule an appointment',
+          'refer to specialist',
+          'blood test',
+          'medication refill',
+          'physical therapy',
+        ];
+
+        followUpPhrases.forEach((phrase) => {
+          const regex = new RegExp(`(${phrase})`, 'gi');
+          if (regex.test(text)) {
+            extractedTerms.followUp.push(phrase);
+            highlightedText = highlightedText.replace(
+              regex,
+              `<span class="bg-green-100 text-green-800 px-1 rounded">$1</span>`
+            );
+          }
+        });
 
         if (response.Entities) {
           response.Entities.forEach((entity) => {
@@ -71,7 +92,7 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({
               if (entity.Category === 'MEDICAL_CONDITION') extractedTerms.symptoms.push(entity.Text);
               if (entity.Category === 'ANATOMY') extractedTerms.diagnosis.push(entity.Text);
               if (entity.Category === 'TEST_TREATMENT_PROCEDURE') extractedTerms.followUp.push(entity.Text);
-              if(entity.Category === 'MEDICATION') {
+              if (entity.Category === 'MEDICATION') {
                 extractedTerms.medication.push(entity.Text);
               }
             }
@@ -80,7 +101,7 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({
 
         console.log('Extracted Medical Terms:', extractedTerms);
         setHighlightedTranscript(highlightedText);
-        setMedicalTerms(extractedTerms); 
+        setMedicalTerms(extractedTerms);
       } catch (error) {
         console.error('Error detecting medical entities:', error);
       }

@@ -170,9 +170,7 @@ const RecordSession: React.FC = () => {
   };
   
   const handleSaveEdit = () => {
-    // In a real app, this would update the transcript with the edited version
     setIsEditing(false);
-    // Then re-run analysis on the updated transcript
   };
   
   useEffect(() => {
