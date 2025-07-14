@@ -49,7 +49,6 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({
           medication: [] as string[],
         };
 
-        // Check for specific phrases manually
         const followUpPhrases = [
           'follow up in 2 weeks',
           'schedule an appointment',

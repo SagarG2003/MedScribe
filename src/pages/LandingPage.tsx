@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
             </div>
             <div className="relative">
               <img 
-                src="./public/MedScribeImage.jpg"
+                src="\Medsribeimage.jpg"
                 alt="Doctor using MedScribe"
                 className="rounded-lg shadow-xl"
               />
