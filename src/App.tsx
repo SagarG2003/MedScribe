@@ -1,4 +1,4 @@
-// Description: This is the main entry point of the application. It sets up the routing for the application using Reaact Router.
+// Description: This is the main entry point of the application. It sets up the routing for the application using React Router.
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AppLayout from './layouts/AppLayout';
 import Dashboard from './pages/Dashboard';
