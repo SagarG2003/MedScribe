@@ -31,8 +31,8 @@ const TranscriptView: React.FC<TranscriptViewProps> = ({
       const client = new ComprehendMedicalClient({
         region: 'us-east-1',
         credentials: {
-          accessKeyId: 'AKIA5FTY675QX7Q3N2KO',
-          secretAccessKey: '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',
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
         },
       });
       const command = new DetectEntitiesV2Command({ Text: text });
