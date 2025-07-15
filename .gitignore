@@ -10,7 +10,7 @@ node_modules
 *.local
 
 # Environment variables
-.env
+.env.local
 
 # Editor directories and files
 .vscode/*
