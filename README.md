@@ -63,13 +63,13 @@ npm run dev
 ## Screenshots
 
 ### Landing Page
-![Landing Page](Screenshots\Landingpage.png)
-![Landing Page](Screenshots\Landingpage1.png)
-![Process](Screenshots/Landingpage2.png)
+![Landing Page](https://github.com/SagarG2003/MedScribe/blob/main/Screenshots/Landingpage.png)
+![Landing Page](https://github.com/SagarG2003/MedScribe/blob/main/Screenshots/Landingpage1.png)
+![Process](https://github.com/SagarG2003/MedScribe/blob/main/Screenshots/Landingpage2.png)
 
 ### Doctor's Dashboard
-![Dashboard](Screenshots\Dashboard.png)
-![Dashboard](Screenshots\Dashboard1.png)
+![Dashboard](https://github.com/SagarG2003/MedScribe/blob/main/Screenshots/Dashboard.png)
+![Dashboard](https://github.com/SagarG2003/MedScribe/blob/main/Screenshots/Dashboard1.png)
 
 ## Badges
 
